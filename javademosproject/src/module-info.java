@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author var
+ *
+ */
+module javademosproject {
+}
