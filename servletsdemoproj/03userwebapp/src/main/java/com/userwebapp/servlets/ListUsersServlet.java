@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,10 +22,14 @@ public class ListUsersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private Connection connection;
     
-	public void init() {
+	public void init(ServletConfig config) {
     	try {
-    		Class.forName("com.mysql.cj.jdbc.Driver");
-			connection=DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "root");
+    		ServletContext context=config.getServletContext();
+			String dburl = config.getInitParameter("dburl");
+			String dbuser= config.getInitParameter("dbuser");
+			String dbpassword = config.getInitParameter("dbpassword");
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			connection=DriverManager.getConnection(dburl, dbuser, dbpassword);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
